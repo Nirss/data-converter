@@ -11,12 +11,17 @@ type Param struct {
 	Value int64  `yaml:"value"`
 }
 
-type conf struct {
+type config struct {
 	Currencies []Param `yaml:"currencies"`
 }
 
 func main() {
-	var c conf
+	yamlFile := yamlParse()
+	fmt.Printf("%v", yamlFile)
+}
+
+func yamlParse() config {
+	var c config
 	data, err := ioutil.ReadFile("data_file.yaml")
 	if err != nil {
 		panic(err)
@@ -25,5 +30,5 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(c)
+	return c
 }
